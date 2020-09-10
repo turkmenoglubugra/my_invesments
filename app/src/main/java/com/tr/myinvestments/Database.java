@@ -37,13 +37,13 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE " + TABLO_INVESTMENT + "("
                 + ROW_ID_INVESTMENT + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + currencyBuy + " INTEGER NOT NULL, "
-                + valueBuy + " DOUBLE  NOT NULL, "
+                + valueBuy + " REAL  NOT NULL, "
                 + buyDate + " INTEGER NOT NULL, "
                 + currencySell + " INTEGER, "
-                + valueSell + " DOUBLE, "
+                + valueSell + " REAL, "
                 + sellDate + " INTEGER, "
-                + profitLoss + " DOUBLE,"
-                + value +  " DOUBLE NOT NULL);");
+                + profitLoss + " REAL,"
+                + value +  " REAL NOT NULL);");
 
         db.execSQL("CREATE TABLE " + TABLO_CURRENCY + "("
                 + ROW_ID_CURRENCY + " INTEGER PRIMARY KEY AUTOINCREMENT, "

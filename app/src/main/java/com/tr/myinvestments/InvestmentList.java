@@ -49,7 +49,8 @@ public class InvestmentList extends AppCompatActivity {
     private Button cancelUserDataButton = null;
     private String selection = "0";
     private int positionSaveCur = -1;
-
+    private AlertDialog.Builder alertDialogBuilder;
+    private AlertDialog alertDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,7 +108,7 @@ public class InvestmentList extends AppCompatActivity {
                     });
                     try {
                         // Sleep for 100 milliseconds to show the progress slowly.
-                        Thread.sleep(100);
+                        Thread.sleep(40);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -132,7 +133,13 @@ public class InvestmentList extends AppCompatActivity {
         buyPriceEditText = (EditText) popupInputDialogView.findViewById(R.id.email);
         saveUserDataButton = popupInputDialogView.findViewById(R.id.button_save_user_data);
         cancelUserDataButton = popupInputDialogView.findViewById(R.id.button_cancel_user_data);
-}
+
+        alertDialogBuilder = new AlertDialog.Builder(InvestmentList.this);
+        alertDialogBuilder.setTitle("Add Open Position");
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setView(popupInputDialogView);
+         alertDialog = alertDialogBuilder.create();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -147,12 +154,9 @@ public class InvestmentList extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.investmentAddAction:
                 try {
-                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(InvestmentList.this);
-                    alertDialogBuilder.setTitle("Add Open Position");
-                    alertDialogBuilder.setCancelable(false);
-                    alertDialogBuilder.setView(popupInputDialogView);
-
-                    final AlertDialog alertDialog = alertDialogBuilder.create();
+                    currencyEditText.setText("");
+                    valueEditText.setText("");
+                    buyPriceEditText.setText("");
                     alertDialog.show();
 
                     // When user click the save user data button in the popup dialog.
