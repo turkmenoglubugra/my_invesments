@@ -11,7 +11,7 @@ import java.util.List;
 
 public class Database extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "MYINVESTMENTS1";
+    private static final String DATABASE_NAME = "MYINVESTMENTS2";
     private static final int DATABASE_VERSION = 1;
     private static final String TABLO_INVESTMENT = "investment";
     private static final String ROW_ID_INVESTMENT = "id";
@@ -39,12 +39,10 @@ public class Database extends SQLiteOpenHelper {
                 + currencyBuy + " INTEGER NOT NULL, "
                 + valueBuy + " REAL  NOT NULL, "
                 + buyDate + " INTEGER NOT NULL, "
-                + currencySell + " INTEGER, "
                 + valueSell + " REAL, "
                 + sellDate + " INTEGER, "
-                + profitLoss + " REAL,"
+                + profitLoss + " REAL, "
                 + value +  " REAL NOT NULL);");
-
         db.execSQL("CREATE TABLE " + TABLO_CURRENCY + "("
                 + ROW_ID_CURRENCY + " INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + name + " String NOT NULL);");
@@ -57,14 +55,13 @@ public class Database extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLO_CURRENCY);
         onCreate(db);
     }
-    public void VeriEkleInvestment(int currencyBuy, Double valueBuy, Integer buyDate, Integer currencySell, Double valueSell, Integer sellDate, Double profitLoss, Double value){
+    public void VeriEkleInvestment(int currencyBuy, Double valueBuy, Integer buyDate, Double valueSell, Integer sellDate, Double profitLoss, Double value){
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues cv = new ContentValues();
             cv.put(this.currencyBuy, currencyBuy);
             cv.put(this.valueBuy, valueBuy);
             cv.put(this.buyDate, buyDate);
-            cv.put(this.currencySell, currencySell);
             cv.put(this.valueSell, valueSell);
             cv.put(this.sellDate, sellDate);
             cv.put(this.profitLoss, profitLoss);
@@ -99,20 +96,22 @@ public class Database extends SQLiteOpenHelper {
                 Currency objCur = new Currency(cursorCur.getInt(0),cursorCur.getString(1));
                 verilerCur.add(objCur);
             }
-            String[] stunlar = {ROW_ID_INVESTMENT,currencyBuy,valueBuy, buyDate,currencySell,valueSell,sellDate,profitLoss,value};
+            String[] stunlar = {ROW_ID_INVESTMENT,currencyBuy,valueBuy, buyDate,valueSell,sellDate,profitLoss,value};
             Cursor cursor = db.query(TABLO_INVESTMENT, stunlar,null,null,null,null,null);
             while (cursor.moveToNext()){
                 Calendar calendar1 = Calendar.getInstance();
                 calendar1.setTimeInMillis(cursor.getInt(2));
                 Calendar calendar2 = Calendar.getInstance();
                 calendar2.setTimeInMillis(cursor.getInt(5));
-                Investment obj = new Investment(cursor.getInt(0),cursor.getDouble(1),calendar1.getTime(),cursor.getInt(3),cursor.getDouble(4),calendar2.getTime(),cursor.getDouble(6), cursor.getDouble(7));
+                Investment obj = new Investment(cursor.getInt(1),cursor.getDouble(2),calendar1.getTime(),cursor.getDouble(4),calendar2.getTime(),cursor.getDouble(6), cursor.getDouble(7),cursor.getInt(0));
                 for(Currency cr : verilerCur){
-                    if(cr.getId() == cursor.getInt(0)){
+                    if(cr.getId() == cursor.getInt(1)){
                         obj.setCurrencyBuyStr(cr.getName());
                     }
                 }
-                veriler.add(obj);
+                if(obj.getProfitLoss() == 0.0 && obj.getValueSell() == 0.0){
+                    veriler.add(obj);
+                }
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -161,20 +160,19 @@ public class Database extends SQLiteOpenHelper {
         db.close();
     }
 
-/*
-    public void VeriDuzenle(int id, String ad, String malzeme, String tarif, byte[] resim){
+
+    public void closePosition(int id,  double profit, double sellPrice){
         SQLiteDatabase db = this.getWritableDatabase();
         try {
             ContentValues cv = new ContentValues();
-            cv.put(ROW_YEMEK_ADI, ad);
-            cv.put(ROW_MALZEME, malzeme);
-            cv.put(ROW_TARIF, tarif);
-            cv.put(ROW_RESIM, resim);
-            String where = ROW_ID +" = '"+ id + "'";
-            db.update(TABLO_TARIFLER,cv,where,null);
+            cv.put(this.sellDate, (int) Calendar.getInstance().getTimeInMillis());
+            cv.put(this.valueSell, sellPrice);
+            cv.put(this.profitLoss, profit);
+            String where = ROW_ID_INVESTMENT +" = '"+ id + "'";
+            db.update(TABLO_INVESTMENT,cv,where,null);
         }catch (Exception e){
         }
         db.close();
     }
-*/
+
 }

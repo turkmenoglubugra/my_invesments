@@ -41,10 +41,15 @@
             >
 
             <AutoCompleteTextView
-                android:id="@+id/edtCmpCurrency"
+                android:id="@+id/edtCmpSaveCurrency"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="#FFFF"
+                android:backgroundTint="#FFFF"
+                android:shadowColor="#FFFF"
+                android:outlineAmbientShadowColor="#FFFF"
+                android:outlineSpotShadowColor="#FFFF"
+                android:editable="false"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
                 android:text="" />

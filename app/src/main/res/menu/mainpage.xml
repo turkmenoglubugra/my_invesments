@@ -5,15 +5,42 @@
     <item
         android:id="@+id/investmentAddAction"
         android:enabled="true"
-        android:icon="@android:drawable/ic_menu_add"
         android:orderInCategory="300"
+        android:icon="@android:drawable/ic_menu_add"
         android:title="Add"
-        app:showAsAction="always" />
+        app:showAsAction="always"
+        />
     <item
-        android:id="@+id/investmentSilAction"
+        android:id="@+id/investmentClosePositionAction"
+        android:enabled="true"
+        android:orderInCategory="300"
+        android:title="Close Position"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/investmentAssetsAction"
+        android:enabled="true"
+        android:orderInCategory="300"
+        android:title="My Investments"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/investmentClearAction"
+        android:enabled="true"
+        android:orderInCategory="300"
+        android:title="Clear"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/investmentDeleteAction"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="300"
         android:title="Delete"
         app:showAsAction="always" />
+    <item
+        android:id="@+id/investmentAddCurrencyAction"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="300"
+        android:title="Add Currency"
+        app:showAsAction="never" />
+
 </menu>

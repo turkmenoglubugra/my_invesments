@@ -6,13 +6,22 @@ public class Investment {
     private Integer currencyBuy;
     private Double valueBuy;
     private Date buyDate;
-    private Integer currencySell;
     private Double valueSell;
     private Date sellDate;
     private Double profitLoss;
     private Double value;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     private String currencyBuyStr;
     private String currencySellStr;
+    private int id;
 
     public String getCurrencyBuyStr() {
         return currencyBuyStr;
@@ -30,15 +39,15 @@ public class Investment {
         this.currencySellStr = currencySellStr;
     }
 
-    public Investment(Integer currencyBuy, Double valueBuy, Date buyDate, Integer currencySell, Double valueSell, Date sellDate, Double profitLoss, Double value) {
+    public Investment(Integer currencyBuy, Double valueBuy, Date buyDate, Double valueSell, Date sellDate, Double profitLoss, Double value, Integer id) {
         this.currencyBuy = currencyBuy;
         this.valueBuy = valueBuy;
         this.buyDate = buyDate;
-        this.currencySell = currencySell;
         this.valueSell = valueSell;
         this.sellDate = sellDate;
         this.profitLoss = profitLoss;
         this.value = value;
+        this.id = id;
     }
 
     public Investment() {
@@ -65,14 +74,6 @@ public class Investment {
 
     public void setBuyDate(Date buyDate) {
         this.buyDate = buyDate;
-    }
-
-    public Integer getCurrencySell() {
-        return currencySell;
-    }
-
-    public void setCurrencySell(Integer currencySell) {
-        this.currencySell = currencySell;
     }
 
     public Double getValueSell() {
