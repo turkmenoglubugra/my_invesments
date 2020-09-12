@@ -17,12 +17,6 @@
         android:title="Close Position"
         app:showAsAction="never" />
     <item
-        android:id="@+id/investmentAssetsAction"
-        android:enabled="true"
-        android:orderInCategory="300"
-        android:title="My Investments"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/investmentClearAction"
         android:enabled="true"
         android:orderInCategory="300"
@@ -41,6 +35,12 @@
         android:icon="@android:drawable/ic_menu_delete"
         android:orderInCategory="300"
         android:title="Add Currency"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/investmentClosedPositionAction"
+        android:enabled="true"
+        android:orderInCategory="300"
+        android:title="Closed Positions"
         app:showAsAction="never" />
 
 </menu>

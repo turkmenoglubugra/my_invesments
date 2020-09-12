@@ -2,7 +2,6 @@ package com.tr.myinvestments;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,21 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.SimpleAdapter;
 import android.widget.TextView;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-
 import cn.pedant.SweetAlert.SweetAlertDialog;
 
 public class InvestmentList extends AppCompatActivity {
@@ -258,14 +249,6 @@ public class InvestmentList extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 return true;
-            case R.id.investmentAssetsAction:
-                if(listInvestment.size() == 0){
-                    new SweetAlertDialog(InvestmentList.this, SweetAlertDialog.ERROR_TYPE)
-                            .setTitleText("Oops...")
-                            .setContentText("There is no investment!")
-                            .show();
-                }
-                return true;
             case R.id.investmentClearAction:
                 edtCmpCurrency.setText("");
                 distTextView.setText("X X X X X X");
@@ -346,6 +329,7 @@ public class InvestmentList extends AppCompatActivity {
                                             .setTitleText("Oops...")
                                             .setContentText("Sell Price Must Be Written!")
                                             .show();
+                                    return;
                                 }
                                 Database db2 = new Database(InvestmentList.this);
                                 Investment obj = listInvestment.get(positionInv-1);
@@ -358,13 +342,17 @@ public class InvestmentList extends AppCompatActivity {
                         cancelButtonClosePosition.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View view) {
-                                alertDialogAddCurrency.cancel();
+                                alertDialogClosePosition.cancel();
                             }
                         });
                     }catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
+                return true;
+            case R.id.investmentClosedPositionAction:
+                Intent myIntent = new Intent(InvestmentList.this, ClosePosition.class);
+                InvestmentList.this.startActivity(myIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

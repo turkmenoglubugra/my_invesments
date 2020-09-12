@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#f00"
+        android:orientation="horizontal"
+        android:gravity="center_horizontal"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/tx1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:padding="10sp"
+            android:textSize="18dp"
+            android:text="Value"
+            android:textColor="#FFFF"
+            android:textStyle="bold"></TextView>
+
+        <TextView
+            android:id="@+id/tx2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:textSize="18dp"
+            android:padding="10sp"
+            android:text="Currency"
+            android:textColor="#FFFF"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/tx4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:textSize="18dp"
+            android:padding="10sp"
+            android:text="Buy"
+            android:textColor="#FFFF"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/tx5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:textSize="18dp"
+            android:padding="10sp"
+            android:text="Sell"
+            android:textColor="#FFFF"
+            android:textStyle="bold"></TextView>
+        <TextView
+            android:id="@+id/tx6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#f00"
+            android:textSize="18dp"
+            android:padding="10sp"
+            android:text="Profit"
+            android:textColor="#FFFF"
+            android:textStyle="bold"></TextView>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
