@@ -20,6 +20,9 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.jjoe64.graphview.GraphView;
+
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -52,7 +55,7 @@ public class InvestmentList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_investmentlist);
-
+        setTitle("Open Positions");
 
         LayoutInflater layoutInflaterAddInvestment = LayoutInflater.from(InvestmentList.this);
         LayoutInflater layoutInflaterAddCurrency = LayoutInflater.from(InvestmentList.this);
@@ -60,7 +63,7 @@ public class InvestmentList extends AppCompatActivity {
 
         popupInputDialogSaveInvestment = layoutInflaterAddInvestment.inflate(R.layout.popup_input_dialog, null);
         popupInputDialogAddCurrency = layoutInflaterAddCurrency.inflate(R.layout.addcurrency_input_dialog, null);
-        popupInputDialogClosePosition = layoutInflaterAddCurrency.inflate(R.layout.closeposition_input_dialog, null);
+        popupInputDialogClosePosition = layoutInflaterClosePosition.inflate(R.layout.closeposition_input_dialog, null);
 
         alertDialogBuilderSaveInvestment = new AlertDialog.Builder(InvestmentList.this);
         alertDialogBuilderAddCurrency = new AlertDialog.Builder(InvestmentList.this);
@@ -175,7 +178,7 @@ public class InvestmentList extends AppCompatActivity {
 
     private void invListele() {
         Database vt = new Database(InvestmentList.this);
-        listInvestment = vt.VeriListeleInvestment();
+        listInvestment = vt.VeriListeleInvestment(0);
 
         InvesmentAdapter adapter = new InvesmentAdapter(InvestmentList.this, listInvestment);
         veriListele.setAdapter(adapter);
@@ -229,7 +232,7 @@ public class InvestmentList extends AppCompatActivity {
                             Database db = new Database(InvestmentList.this);
                             db.VeriEkleInvestment(idCurrency, Double.parseDouble(buyPrice), (int) Calendar.getInstance().getTimeInMillis(), null, null, null, Double.parseDouble(value));
                             Database vt = new Database(InvestmentList.this);
-                            listInvestment = vt.VeriListeleInvestment();
+                            listInvestment = vt.VeriListeleInvestment(0);
                             InvesmentAdapter adapter = new InvesmentAdapter(InvestmentList.this, listInvestment);
                             veriListele.setAdapter(adapter);
                             edtCmpCurrency.setSelection(0);
@@ -262,7 +265,7 @@ public class InvestmentList extends AppCompatActivity {
                             .show();
                 } else {
                     db.VeriSilInvestment(listInvestment.get(positionInv-1).getId());
-                    listInvestment = db.VeriListeleInvestment();
+                    listInvestment = db.VeriListeleInvestment(0);
                     InvesmentAdapter adapter = new InvesmentAdapter(InvestmentList.this, listInvestment);
                     veriListele.setAdapter(adapter);
                     positionInv=-1;
@@ -334,7 +337,9 @@ public class InvestmentList extends AppCompatActivity {
                                 Database db2 = new Database(InvestmentList.this);
                                 Investment obj = listInvestment.get(positionInv-1);
                                 double profit = (obj.getValue() * new Double(valueEditTextClosePosition.getText().toString()))  - (obj.getValue() * obj.getValueBuy());
+                                profit = new Double(String.format("%.2f", profit).replace(",","."));
                                 db2.closePosition(obj.getId(), profit, new Double(valueEditTextClosePosition.getText().toString()));
+                                valueEditTextClosePosition.setText("");
                                 alertDialogClosePosition.cancel();
                                 invListele();
                             }
@@ -353,6 +358,10 @@ public class InvestmentList extends AppCompatActivity {
             case R.id.investmentClosedPositionAction:
                 Intent myIntent = new Intent(InvestmentList.this, ClosePosition.class);
                 InvestmentList.this.startActivity(myIntent);
+                return true;
+            case R.id.investmentGraphic:
+                Intent myIntent2 = new Intent(InvestmentList.this, Graphic.class);
+                InvestmentList.this.startActivity(myIntent2);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

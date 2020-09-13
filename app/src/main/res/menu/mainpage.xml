@@ -3,44 +3,53 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/investmentAddCurrencyAction"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_delete"
+        android:orderInCategory="1"
+        android:title="Add Currency"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/investmentAddAction"
         android:enabled="true"
-        android:orderInCategory="300"
+        android:orderInCategory="2"
         android:icon="@android:drawable/ic_menu_add"
         android:title="Add"
         app:showAsAction="always"
         />
     <item
-        android:id="@+id/investmentClosePositionAction"
-        android:enabled="true"
-        android:orderInCategory="300"
-        android:title="Close Position"
-        app:showAsAction="never" />
-    <item
         android:id="@+id/investmentClearAction"
         android:enabled="true"
-        android:orderInCategory="300"
+        android:orderInCategory="3"
         android:title="Clear"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/investmentClosePositionAction"
+        android:enabled="true"
+        android:orderInCategory="4"
+        android:title="Close Position"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/investmentDeleteAction"
         android:enabled="true"
         android:icon="@android:drawable/ic_menu_delete"
-        android:orderInCategory="300"
+        android:orderInCategory="5"
         android:title="Delete"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/investmentAddCurrencyAction"
-        android:enabled="true"
-        android:icon="@android:drawable/ic_menu_delete"
-        android:orderInCategory="300"
-        android:title="Add Currency"
-        app:showAsAction="never" />
+
     <item
         android:id="@+id/investmentClosedPositionAction"
         android:enabled="true"
-        android:orderInCategory="300"
-        android:title="Closed Positions"
+        android:orderInCategory="6"
+        android:title="Gain or Loss"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/investmentGraphic"
+        android:enabled="true"
+        android:orderInCategory="7"
+        android:title="Graphic"
         app:showAsAction="never" />
 
 </menu>

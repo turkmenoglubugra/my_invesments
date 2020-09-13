@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ClosePosition"></activity>
+        <activity android:name=".Graphic"></activity>
     </application>
 
 </manifest>

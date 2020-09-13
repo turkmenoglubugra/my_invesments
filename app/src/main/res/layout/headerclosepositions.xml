@@ -61,7 +61,7 @@
             android:background="#f00"
             android:textSize="18dp"
             android:padding="10sp"
-            android:text="Profit"
+            android:text="Gain/Loss"
             android:textColor="#FFFF"
             android:textStyle="bold"></TextView>
     </LinearLayout>

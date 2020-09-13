@@ -31,6 +31,7 @@
             android:textColor="#000000"
             android:background="#FFFF"
             android:backgroundTint="#FFFF"
+            android:textStyle="bold"
             android:shadowColor="#FFFF"
             android:editable="false"
             android:paddingStart="8dp"
@@ -43,7 +44,7 @@
         android:textStyle="bold"
         android:textSize="18dp"
         android:textAlignment="center"
-        android:hint="X X X X X X">
+        android:text="X X X X X X">
 
     </TextView>
 </LinearLayout>

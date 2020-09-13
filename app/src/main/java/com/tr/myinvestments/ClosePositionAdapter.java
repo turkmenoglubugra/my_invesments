@@ -8,15 +8,18 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.TextView;
+
 import java.util.List;
 
-public class InvesmentAdapter extends BaseAdapter {
+public class ClosePositionAdapter extends BaseAdapter {
     private LayoutInflater courseInflater;
     private List<Investment> investmentList;
     private List<Investment> listInvestment;
     private Activity activity;
-    public InvesmentAdapter(Activity activity, List<Investment> investmentList) {
+
+    public ClosePositionAdapter(Activity activity, List<Investment> investmentList) {
         courseInflater = (LayoutInflater) activity.getSystemService(
                 Context.LAYOUT_INFLATER_SERVICE);
         this.activity = activity;
@@ -35,26 +38,29 @@ public class InvesmentAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return i;
+        return investmentList.get(i).getId();
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         View lineView;
-        lineView = courseInflater.inflate(R.layout.investmentlistview, null);
+        lineView = courseInflater.inflate(R.layout.profitlistview, null);
         TextView textViewValue = (TextView) lineView.findViewById(R.id.textViewValue);
         TextView textViewCurrency = (TextView) lineView.findViewById(R.id.textViewCurrency);
         TextView textViewBuyValue = (TextView) lineView.findViewById(R.id.textViewBuyValue);
+        TextView textViewSellValue = (TextView) lineView.findViewById(R.id.textViewSellValue);
+        TextView textViewProfit = (TextView) lineView.findViewById(R.id.textViewProfit);
         Animation animation = null;
         animation = AnimationUtils.loadAnimation(activity, R.anim.slide_in_top);
-        animation.setDuration(1500);
+        animation.setDuration(1000);
         lineView.startAnimation(animation);
         animation = null;
         Investment investment = investmentList.get(i);
-        textViewValue.setText(String.valueOf(investment.getValue()));
+        textViewValue.setText(String.format("%.2f",investment.getValue()));
         textViewCurrency.setText(investment.getCurrencyBuyStr());
-        textViewBuyValue.setText(String.valueOf(investment.getValueBuy()));
-
+        textViewBuyValue.setText(String.format("%.2f",investment.getValueBuy()));
+        textViewSellValue.setText(String.format("%.2f",investment.getValueSell()));
+        textViewProfit.setText(String.format("%.2f",investment.getProfitLoss()));
         return lineView;
     }
 }

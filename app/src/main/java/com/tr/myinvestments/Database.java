@@ -85,7 +85,7 @@ public class Database extends SQLiteOpenHelper {
         db.close();
     }
 
-    public List<Investment> VeriListeleInvestment(){
+    public List<Investment> VeriListeleInvestment(int i){
         List<Investment> veriler = new ArrayList<Investment>();
         SQLiteDatabase db = this.getReadableDatabase();
         try {
@@ -109,9 +109,16 @@ public class Database extends SQLiteOpenHelper {
                         obj.setCurrencyBuyStr(cr.getName());
                     }
                 }
-                if(obj.getProfitLoss() == 0.0 && obj.getValueSell() == 0.0){
-                    veriler.add(obj);
+                if(i == 0){
+                    if(obj.getProfitLoss() == 0.0 && obj.getValueSell() == 0.0){
+                        veriler.add(obj);
+                    }
+                } else if (i == 1){
+                    if(obj.getProfitLoss() != 0.0 && obj.getValueSell() != 0.0){
+                        veriler.add(obj);
+                    }
                 }
+
             }
         }catch (Exception e){
             e.printStackTrace();
