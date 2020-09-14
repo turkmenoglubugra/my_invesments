@@ -20,7 +20,6 @@ public class Investment {
     }
 
     private String currencyBuyStr;
-    private String currencySellStr;
     private int id;
 
     public String getCurrencyBuyStr() {
@@ -29,14 +28,6 @@ public class Investment {
 
     public void setCurrencyBuyStr(String currencyBuyStr) {
         this.currencyBuyStr = currencyBuyStr;
-    }
-
-    public String getCurrencySellStr() {
-        return currencySellStr;
-    }
-
-    public void setCurrencySellStr(String currencySellStr) {
-        this.currencySellStr = currencySellStr;
     }
 
     public Investment(Integer currencyBuy, Double valueBuy, Date buyDate, Double valueSell, Date sellDate, Double profitLoss, Double value, Integer id) {

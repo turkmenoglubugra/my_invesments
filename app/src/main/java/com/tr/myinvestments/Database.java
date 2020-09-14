@@ -110,11 +110,11 @@ public class Database extends SQLiteOpenHelper {
                     }
                 }
                 if(i == 0){
-                    if(obj.getProfitLoss() == 0.0 && obj.getValueSell() == 0.0){
+                    if(obj.getValueSell() == 0.0){
                         veriler.add(obj);
                     }
                 } else if (i == 1){
-                    if(obj.getProfitLoss() != 0.0 && obj.getValueSell() != 0.0){
+                    if(obj.getValueSell() != 0.0){
                         veriler.add(obj);
                     }
                 }

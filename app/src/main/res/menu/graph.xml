@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/lineGraph"
+        android:enabled="true"
+        android:icon="@mipmap/lineicon_round"
+        android:orderInCategory="300"
+        android:title="Delete"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/pieGraph"
+        android:enabled="true"
+        android:icon="@mipmap/pieicon_round"
+        android:orderInCategory="300"
+        android:title="Delete"
+        app:showAsAction="always" />
+</menu>

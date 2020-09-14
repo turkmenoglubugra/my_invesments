@@ -31,6 +31,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
 public class InvestmentList extends AppCompatActivity {
     private ListView veriListele;
     private List<Investment> listInvestment;
+    private List<Investment> listClosePosition;
     private List<Currency> listCurrency;
     private List<String> listCurrencyStr;
     private ProgressBar pgsBar;
@@ -50,6 +51,7 @@ public class InvestmentList extends AppCompatActivity {
     private FloatingActionButton fab;
     private AutoCompleteTextView edtCmpCurrency;
     private TextView distTextView;
+    private Menu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -179,6 +181,7 @@ public class InvestmentList extends AppCompatActivity {
     private void invListele() {
         Database vt = new Database(InvestmentList.this);
         listInvestment = vt.VeriListeleInvestment(0);
+        listClosePosition = vt.VeriListeleInvestment(1);
 
         InvesmentAdapter adapter = new InvesmentAdapter(InvestmentList.this, listInvestment);
         veriListele.setAdapter(adapter);
@@ -187,6 +190,7 @@ public class InvestmentList extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
+        this.menu = menu;
         MenuInflater inflater =getMenuInflater();
         inflater.inflate(R.menu.mainpage,menu);
         return super.onCreateOptionsMenu(menu);
@@ -214,6 +218,13 @@ public class InvestmentList extends AppCompatActivity {
                             }
 
                             String value = valueEditTextAddInvestment.getText().toString();
+                            if(value.trim().equals("")){
+                                new SweetAlertDialog(InvestmentList.this, SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Oops...")
+                                        .setContentText("Value Must Be Filled!")
+                                        .show();
+                                return;
+                            }
                             Integer idCurrency = 0;
                             for (Currency cr : listCurrency) {
                                 if (cr.getName().equals(selection)) {
@@ -228,6 +239,13 @@ public class InvestmentList extends AppCompatActivity {
                                 return;
                             }
                             String buyPrice = buyPriceEditText.getText().toString();
+                            if(buyPrice.trim().equals("")){
+                                new SweetAlertDialog(InvestmentList.this, SweetAlertDialog.ERROR_TYPE)
+                                        .setTitleText("Oops...")
+                                        .setContentText("Buy Price Must Be Filled!")
+                                        .show();
+                                return;
+                            }
 
                             Database db = new Database(InvestmentList.this);
                             db.VeriEkleInvestment(idCurrency, Double.parseDouble(buyPrice), (int) Calendar.getInstance().getTimeInMillis(), null, null, null, Double.parseDouble(value));
@@ -360,8 +378,26 @@ public class InvestmentList extends AppCompatActivity {
                 InvestmentList.this.startActivity(myIntent);
                 return true;
             case R.id.investmentGraphic:
-                Intent myIntent2 = new Intent(InvestmentList.this, Graphic.class);
-                InvestmentList.this.startActivity(myIntent2);
+                List<String> list = new ArrayList<String>();
+                for(Investment ws : listClosePosition){
+                    if(!list.contains(ws.getCurrencyBuyStr().trim())){
+                        list.add(ws.getCurrencyBuyStr().trim());
+                    }
+                }
+                if(list.size() > 1 || listInvestment.size() > 0){
+                    Intent myIntent2 = new Intent(InvestmentList.this, Graphic.class);
+                    if(listInvestment.size() > 0){
+                        myIntent2.putExtra("key", "0");
+                    } else {
+                        myIntent2.putExtra("key", "1");
+                    }
+                    InvestmentList.this.startActivity(myIntent2);
+                } else {
+                    new SweetAlertDialog(InvestmentList.this, SweetAlertDialog.ERROR_TYPE)
+                            .setTitleText("Oops...")
+                            .setContentText("To create a chart, you must have closed positions for two different currencies. or one open position at least!")
+                            .show();
+                }
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
