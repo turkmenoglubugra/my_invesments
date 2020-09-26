@@ -16,7 +16,7 @@
 
         <EditText
             android:id="@+id/userName"
-            android:inputType="number" />
+            android:inputType="numberDecimal" />
 
     </TableRow>
 

@@ -2,6 +2,7 @@ package com.tr.myinvestments;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,6 +61,13 @@ public class ClosePositionAdapter extends BaseAdapter {
         textViewCurrency.setText(investment.getCurrencyBuyStr());
         textViewBuyValue.setText(String.format("%.2f",investment.getValueBuy()));
         textViewSellValue.setText(String.format("%.2f",investment.getValueSell()));
+        if(investment.getProfitLoss() > 0){
+            textViewProfit.setTextColor(Color.parseColor("#10D210"));
+        } else if (investment.getProfitLoss() < 0) {
+            textViewProfit.setTextColor(Color.parseColor("#FF0000"));
+        } else {
+            textViewProfit.setTextColor(Color.parseColor("#000000"));
+        }
         textViewProfit.setText(String.format("%.2f",investment.getProfitLoss()));
         return lineView;
     }

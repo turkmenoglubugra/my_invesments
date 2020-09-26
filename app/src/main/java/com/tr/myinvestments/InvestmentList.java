@@ -255,7 +255,7 @@ public class InvestmentList extends AppCompatActivity {
                             veriListele.setAdapter(adapter);
                             edtCmpCurrency.setSelection(0);
                             edtCmpCurrency.setText("");
-                            distTextView.setText("X X X X X X");
+                            distTextView.setText("Open Position Not Found!");
                             alertDialogAddInvestment.cancel();
                         }
                     });
@@ -272,7 +272,7 @@ public class InvestmentList extends AppCompatActivity {
                 return true;
             case R.id.investmentClearAction:
                 edtCmpCurrency.setText("");
-                distTextView.setText("X X X X X X");
+                distTextView.setText("Open Position Not Found!");
                 return true;
             case R.id.investmentDeleteAction:
                 Database db = new Database(InvestmentList.this);
@@ -360,6 +360,7 @@ public class InvestmentList extends AppCompatActivity {
                                 valueEditTextClosePosition.setText("");
                                 alertDialogClosePosition.cancel();
                                 invListele();
+                                positionInv = -1;
                             }
                         });
                         cancelButtonClosePosition.setOnClickListener(new View.OnClickListener() {
@@ -378,6 +379,7 @@ public class InvestmentList extends AppCompatActivity {
                 InvestmentList.this.startActivity(myIntent);
                 return true;
             case R.id.investmentGraphic:
+                invListele();
                 List<String> list = new ArrayList<String>();
                 for(Investment ws : listClosePosition){
                     if(!list.contains(ws.getCurrencyBuyStr().trim())){
@@ -395,7 +397,7 @@ public class InvestmentList extends AppCompatActivity {
                 } else {
                     new SweetAlertDialog(InvestmentList.this, SweetAlertDialog.ERROR_TYPE)
                             .setTitleText("Oops...")
-                            .setContentText("To create a chart, you must have closed positions for two different currencies. or one open position at least!")
+                            .setContentText("To create a chart, you must have closed positions for two different currencies or one open position at least!")
                             .show();
                 }
                 return true;

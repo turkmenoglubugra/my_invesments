@@ -44,7 +44,7 @@
         android:textStyle="bold"
         android:textSize="18dp"
         android:textAlignment="center"
-        android:text="X X X X X X">
+        android:text="Open Position Not Found!">
 
     </TextView>
 </LinearLayout>

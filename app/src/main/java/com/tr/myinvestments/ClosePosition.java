@@ -1,5 +1,6 @@
 package com.tr.myinvestments;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -52,8 +53,16 @@ public class ClosePosition extends AppCompatActivity {
                 total = total + inv.getProfitLoss();
             }
             edtCmpTotal.setText(String.format("%.2f",total));
+            if(total > 0){
+                edtCmpTotal.setTextColor(Color.parseColor("#10D210"));
+            } else if (total < 0) {
+                edtCmpTotal.setTextColor(Color.parseColor("#FF0000"));
+            } else {
+                edtCmpTotal.setTextColor(Color.parseColor("#000000"));
+            }
         } else {
-            edtCmpTotal.setText("X X X X X X");
+            edtCmpTotal.setText("Closed Position Not Found!");
+            edtCmpTotal.setTextColor(Color.parseColor("#000000"));
         }
 
         ClosePositionAdapter adapter = new ClosePositionAdapter(ClosePosition.this, listInvestment);
